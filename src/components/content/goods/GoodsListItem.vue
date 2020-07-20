@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" alt @load="imageLoad" />
+    <img :src="imgSrc" alt @load="imageLoad" />
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">￥{{goodsItem.price}}</span>
@@ -18,6 +18,12 @@ export default {
       default() {
         return {};
       }
+    }
+  },
+  computed: {
+    imgSrc() {
+      //注意顺序，迭代少的在前面，因为如果没有shou.img的话，先执行show.img会报错，img是undefined的属性
+      return this.goodsItem.image || this.goodsItem.show.img
     }
   },
   methods: {

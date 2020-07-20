@@ -55,6 +55,7 @@ export default {
 
     refresh() {
       this.scroll && this.scroll.refresh()
+      console.log("已刷新");
     },
 
     getScrollY() {
