@@ -18,7 +18,6 @@ import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
 import TabControl from 'components/content/tabcontrol/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
-import BackTop from 'components/content/backtop/BackTop'
 
 import HomeSwiper from './childComps/HomeSwiper'
 import HomeRecommendView from "./childComps/HomeRecommendView"
@@ -26,6 +25,7 @@ import FeatureView from "./childComps/FeatureView"
 
 import {getHomeMultidata, getHomeGoods} from 'network/home'
 import {debounce} from 'common/utils'
+import {itemListenerMixin, backTopMixin} from 'common/mixin'
 
 
 export default {
@@ -35,11 +35,11 @@ export default {
     Scroll,
     TabControl,
     GoodsList,
-    BackTop,
     HomeSwiper,
     HomeRecommendView,
     FeatureView
   },
+  mixins: [itemListenerMixin, backTopMixin],
   data() {
     return {
       banners: [],
@@ -50,7 +50,6 @@ export default {
         'sell': {page: 0, list: []}
       },
       currentType: 'pop',
-      isShowBackTop: false,
       tabOffsetTop: 0,
       isTabFixed: false,
       saveY: 0
@@ -69,19 +68,28 @@ export default {
 
   mounted() {
     //监听item中的图片是否加载完成
-    const refresh = debounce(this.$refs.scroll.refresh, 500)
-    this.$bus.$on('itemImageLoad', () => {
-      refresh()
-    })
+    //这个地方图片img确实被挂载，但是图片还没有占据高度
+    /* const refresh = debounce(this.$refs.scroll.refresh, 500)
+    this.itemImageListener = () => {refresh()}
+    this.$bus.$on('itemImageLoad', this.itemImageListener) */
   },
 
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
+
+    //回到首页，一定要刷新一次，要不然会出现莫名其妙的问题
     this.$refs.scroll.refresh()
+
+    this.$bus.$on('itemImageLoad', this.itemImageListener)
   },
 
   deactivated() {
+    //1.保存离开时的y值
     this.saveY = this.$refs.scroll.getScrollY()
+
+    //2.取消首页的高度刷新
+    this.$bus.$off('itemImageLoad', this.itemImageListener)
+    //取消了有一个问题，再回来的时候需要再次激活
   },
 
   methods: {
@@ -117,11 +125,6 @@ export default {
       this.$refs.tabControl.currentIndex = index
     },
 
-    //回到顶部方法，第三个参数控制快慢ms
-    backTopClick() {
-      this.$refs.scroll.scrollTo(0, 0)
-    },
-
     //滚动监听
     contentScroll(position) {
       //控制什么时候显示回到顶部按钮
@@ -135,6 +138,7 @@ export default {
     loadMore() {
       this.getHomeGoods(this.currentType)
       this.$refs.scroll.finishPullUp()
+      // console.log("已经加载更多商品了")
     },
 
     //tab-control的offset获取

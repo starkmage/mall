@@ -112,7 +112,11 @@ export default {
     handleDom() {
       //1.获取要操作的元素
       let swiperEl = document.querySelector(".swiper"); //静态方法
-      let slidesEls = swiperEl.getElementsByClassName("slide"); //动态方法
+      let slidesEls = []
+      if(swiperEl) {
+        slidesEls = swiperEl.getElementsByClassName("slide"); //动态方法
+      }
+
 
       //2.保存个数
       this.slideCount = slidesEls.length;

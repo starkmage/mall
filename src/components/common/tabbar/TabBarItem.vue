@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     itemClick() {
+      //加了catch防止重复点击同一个报错
       this.$router.replace(this.path).catch(err => err)
     }
   }
@@ -55,8 +56,9 @@ export default {
 .tab-bar-item img {
   width: 24px;
   height: 24px;
-  margin-top: 3px;
+  margin-top: 5px;
   vertical-align: middle;
+  margin-bottom: 4px;
 }
 
 </style>

@@ -55,7 +55,7 @@ export default {
 
     refresh() {
       this.scroll && this.scroll.refresh()
-      console.log("已刷新");
+      // console.log('我出现几次代表scroll的refresh被执行了几次，高度已经刷新');
     },
 
     getScrollY() {
