@@ -16,7 +16,7 @@ export function getRecommend() {
 }
 
 export class Goods {
-  constructor(itemInfo, columns, services) {
+  constructor(itemInfo, columns, services, skuInfo) {
     this.title = itemInfo.title;
     this.desc = itemInfo.desc;
     this.newPrice = itemInfo.price;
@@ -25,6 +25,8 @@ export class Goods {
     this.columns = columns;
     this.services = services;
     this.nowPrice = itemInfo.highNowPrice;
+    this.colors = skuInfo.props[0].list;
+    this.sizes = skuInfo.props[1].list;
   }
 }
 

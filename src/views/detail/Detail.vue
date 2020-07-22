@@ -3,7 +3,7 @@
     <detail-nav-bar @titleClick="titleClick" ref="nav"></detail-nav-bar>
     <scroll class="content" ref="scroll" @scroll="contentScroll" :probe-type="3">
       <detail-swiper :top-images="topImages"></detail-swiper>
-      <detail-base-info :goods="goods"></detail-base-info>
+      <detail-base-info :goods="goods" ref="baseInfo"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
       <detail-param-info :param-info="paramInfo" ref="params"></detail-param-info>
@@ -74,7 +74,8 @@ export default {
       this.goods = new Goods(
         data.itemInfo,
         data.columns,
-        data.shopInfo.services
+        data.shopInfo.services,
+        data.skuInfo
       );
       //3.获取店铺信息
       this.shop = new Shop(data.shopInfo)
@@ -145,9 +146,12 @@ export default {
       //1.获取购物车需要展示的信息
       const product = {}
       product.iid = this.iid
+      product.shop = this.shop.name
       product.image = this.topImages[0]
       product.title = this.goods.title
       product.price = this.goods.nowPrice
+      product.color = this.goods.colors[this.$refs.baseInfo.selectedColor]['name']
+      product.size = this.goods.sizes[this.$refs.baseInfo.selectedSize]['name']
       
       //2.将商品添加到购物车
       this.$store.dispatch('addCart', product)

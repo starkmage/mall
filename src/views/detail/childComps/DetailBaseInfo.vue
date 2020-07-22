@@ -17,6 +17,16 @@
         <span>{{goods.services[index-1].name}}</span>
       </span>
     </div>
+    <div class="select">
+      <div class="colors">
+        <p>请选择颜色：</p>
+        <span v-for="(item,index) in goods.colors" :key="index" :class="{selected: index === selectedColor}" @click="selectColor(index)">{{item['name']}}</span>
+      </div>
+      <div class="sizes">
+        <p>请选择尺码：</p>
+        <span v-for="(item,index) in goods.sizes" :key="index" :class="{selected: index === selectedSize}" @click="selectSize(index)">{{item['name']}}</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +39,23 @@ export default {
       default() {
         return {};
       }
+    }
+  },
+  data() {
+    return {
+      selectedColor: 0,
+      selectedSize: 0
+    }
+  },
+  methods: {
+    //选择颜色
+    selectColor(index) {
+      this.selectedColor = index
+    },
+
+    //选择尺码
+    selectSize(index) {
+      this.selectedSize = index
     }
   }
 };
@@ -81,7 +108,7 @@ export default {
   align-items: center;
   font-size: 12px;
   line-height: 25px;
-  border-bottom: 1px solid rgba(100,100,100,0.1);
+  border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
 
 .info-service {
@@ -92,6 +119,7 @@ export default {
   font-size: 14px;
   color: #333;
   line-height: 60px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
 
 .info-service img {
@@ -99,5 +127,37 @@ export default {
   width: 14px;
   position: relative;
   top: 2px;
+}
+
+.select {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.select .colors {
+  margin-bottom: 10px;
+}
+
+.select .colors p {
+  margin-bottom: 8px;
+}
+
+.select .sizes p {
+  margin-bottom: 8px;
+}
+
+.select span {
+  display: inline-block;
+  padding: 5px;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  margin: 8px 8px 8px 8px;
+  min-width: 50px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.selected {
+  background-color: #ffe817;
 }
 </style>
