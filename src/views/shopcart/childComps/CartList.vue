@@ -1,6 +1,6 @@
 <template>
   <div class="cart-list">
-    <cart-list-item v-for="(product,index) in cartList" :key="index" :item="product"></cart-list-item>
+    <cart-list-item v-for="(product,index) in cartList" :key="index" :item="product" :index="index"></cart-list-item>
   </div>
 </template>
 

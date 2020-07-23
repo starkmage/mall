@@ -20,9 +20,9 @@
         <div class="item-check">
           <div class="item-price">￥{{item.price}}</div>
           <div class="item-count">
-            <button>-</button>
-            <input type="number" :value="item.count" />
-            <button>+</button>
+            <button @click="deCrement">-</button>
+            <input type="number" v-model.lazy.number="getCount" min="0"/>
+            <button @click="inCrement">+</button>
           </div>
         </div>
       </div>
@@ -40,6 +40,33 @@ export default {
       type: Object,
       default() {
         return {};
+      }
+    },
+    index: {
+      type: Number,
+      default() {
+        return -1
+      }
+    }
+  },
+  methods: {
+    //数量加减按钮，直接通过vuex的mutations修改商品数量
+    deCrement() {
+      this.$store.commit('changeCount', {needIndex: this.index, newCount: this.$store.state.cartList[this.index].count - 1})
+    },
+    inCrement() {
+      this.$store.commit('changeCount', {needIndex: this.index, newCount: this.$store.state.cartList[this.index].count + 1})
+    }
+  },
+  computed: {
+    //利用get和set双向绑定vuex
+    getCount: {
+      get() {
+        return this.$store.state.cartList[this.index].count
+      },
+      set(newCount) {
+        let needIndex = this.index
+        this.$store.commit('changeCount', {needIndex: needIndex, newCount: newCount})
       }
     }
   }
@@ -106,6 +133,10 @@ export default {
 .item-check {
   display: flex;
   justify-content: space-between;
+}
+
+.item-price {
+  color: orangered;
 }
 
 .item-check input {
