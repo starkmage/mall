@@ -11,10 +11,11 @@ import CartListItem from './CartListItem'
 
 
 
+
 export default {
   name: "CartList",
   components: {
-    CartListItem
+    CartListItem,
   },
   computed: {
     ...mapGetters(['cartList'])

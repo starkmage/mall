@@ -1,12 +1,12 @@
 <template>
   <div class="item">
-    <div class="shop-name">
+    <div class="shop-name" v-if="item.shopShow">
       <img src="~assets/img/detail/shop.svg" alt="">
       <span>{{item.shop}}<i class="arrow-right"></i></span>
     </div>
     <div class="product">
       <div class="item-select">
-        <!-- <CheckButton @checkBtnClick="checkedChange" v-model="itemInfo.checked"></CheckButton> -->
+        <CheckButton :is-selected="item.selected" @click.native="selectClick"></CheckButton>
       </div>
       <div class="item-img">
         <img :src="item.image" alt />
@@ -31,10 +31,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import CheckButton from 'components/content/checkbutton/CheckButton'
+
+
 
 export default {
   name: "CartListItem",
+  components: {
+    CheckButton
+  },
   props: {
     item: {
       type: Object,
@@ -56,6 +61,11 @@ export default {
     },
     inCrement() {
       this.$store.commit('changeCount', {needIndex: this.index, newCount: this.$store.state.cartList[this.index].count + 1})
+    },
+
+    //选择商品
+    selectClick() {
+      this.$store.commit('changeSelected', this.index)
     }
   },
   computed: {
@@ -65,8 +75,7 @@ export default {
         return this.$store.state.cartList[this.index].count
       },
       set(newCount) {
-        let needIndex = this.index
-        this.$store.commit('changeCount', {needIndex: needIndex, newCount: newCount})
+        this.$store.commit('changeCount', {needIndex: this.index, newCount: newCount})
       }
     }
   }
@@ -105,6 +114,13 @@ export default {
   height: 100px;
 }
 
+.item-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
 .item-img img {
   width: 80px;
   height: 100px;
@@ -133,6 +149,7 @@ export default {
 .item-check {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .item-price {

@@ -64,6 +64,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 2px;
   margin-bottom: 3px;
 }
 
