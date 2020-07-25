@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST } from './mutation-types'
 
 export default {
   //mutations唯一的目的就是修改state的值
@@ -36,5 +36,16 @@ export default {
   },
   changeSelected(state, payLoad) {
     state.cartList[payLoad].selected = !state.cartList[payLoad].selected
+  },
+
+  //修改登录状态
+  [LOGIN_IN](state, payLoad) {
+    state.isLogin = true
+    state.userId = payLoad
+  },
+  
+  //添加到收藏夹
+  [ADD_TO_FAVLIST](state, payLoad) {
+    state.favList.push(payLoad)
   }
 }

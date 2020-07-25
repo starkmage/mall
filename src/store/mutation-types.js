@@ -1,3 +1,5 @@
 export const ADD_COUNT = 'add_count'
 export const ADD_TO_CART = 'add_to_cart'
 export const ADD_TO_SAMESHOP = 'add_to_sameshop'
+export const LOGIN_IN = 'login_in'
+export const ADD_TO_FAVLIST = 'add_to_favlist'

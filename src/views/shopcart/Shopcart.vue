@@ -40,6 +40,7 @@ export default {
   },
   activated() {
     this.$refs.scroll.refresh()
+    console.log(this.$route.query);
   }
 };
 </script>

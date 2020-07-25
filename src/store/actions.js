@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST } from './mutation-types'
 
 export default {
   addCart(context, payLoad) {
@@ -24,5 +24,20 @@ export default {
       }
     })
 
+  },
+
+  loginIn(context, payLoad) {
+    return new Promise((resolve, reject) => {
+      context.commit(LOGIN_IN, payLoad)
+      resolve('登录成功')
+    })
+  },
+
+  addFav(context, payLoad) {
+    return new Promise((resolve, reject) => {
+      payLoad.fav = true
+      context.commit(ADD_TO_FAVLIST, payLoad)
+      resolve('收藏成功')
+    })
   }
 }

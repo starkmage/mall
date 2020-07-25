@@ -1,0 +1,52 @@
+<template>
+  <div class="info">
+    <div class="fav">
+      <p class="top">0</p>
+      <p class="bottom">商品关注</p>
+    </div>
+    <div class="buy">
+      <p class="top">0</p>
+      <p class="bottom">我的订单</p>
+    </div>
+    <div class="coupon">
+      <p class="top">0</p>
+      <p class="bottom">优惠券</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "UserInfo"
+}
+</script>
+
+<style scoped>
+.info {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-bottom: 10px solid rgba(0,0,0,0.06);
+}
+
+.fav, .buy, .coupon {
+  height: 100%;
+  flex: 1;
+  text-align: center;
+}
+
+.fav, .buy {
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.top {
+  color: orangered;
+  font-size: 19px;
+  margin-top: 15px;
+}
+
+.bottom {
+  margin-top: 7px;
+  font-size: 13px;
+}
+</style>

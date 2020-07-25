@@ -25,20 +25,31 @@ export default {
   name: "DetailBottomBar",
   data() {
     return {
-      isFav: false
-    }
+      isFav: false,
+    };
   },
   methods: {
     //收藏
     fav() {
-      this.isFav = !this.isFav
+      if (this.$store.state.isLogin) {
+        this.isFav = !this.isFav;
+        this.$emit("addFav");
+      } else {
+        this.$toast.show("请您先登录", 1000);
+        this.$router.push("/login");
+      }
     },
 
     //加入购物车
     addCart() {
-      this.$emit('addCart')
-    }
-  }
+      if (this.$store.state.isLogin) {
+        this.$emit("addCart");
+      } else {
+        this.$toast.show("请您先登录", 1000);
+        this.$router.push("/login");
+      }
+    },
+  },
 };
 </script>
 

@@ -5,12 +5,17 @@ import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
 
+
+
 //1.安装插件
 Vue.use(Vuex)
 
 //2.创建store对象
 const state = {
-  cartList: []
+  cartList: [],
+  isLogin: false,
+  userId: null,
+  favList: []
 }
 
 

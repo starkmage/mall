@@ -183,6 +183,19 @@ export default {
         })
       }
     },
+
+    //把商品加入收藏夹
+    addFav() {
+      if(this.topImages.length !== 0) {
+        //1.获取收藏夹需要展示的信息
+        const product = {};
+        product.iid = this.iid;
+        product.image = this.topImages[0];
+        product.title = this.goods.title;
+        product.price = this.goods.nowPrice;
+        product.favs = this.goods.columns[1]
+      }
+    }
   },
 };
 </script>
