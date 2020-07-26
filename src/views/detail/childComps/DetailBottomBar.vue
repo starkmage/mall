@@ -16,24 +16,31 @@
       </div>
     </div>
     <div class="add-cart" @click="addCart">加入购物车</div>
-    <div class="buy">立即购买</div>
+    <div class="buy" @click="buy">立即购买</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "DetailBottomBar",
-  data() {
-    return {
-      isFav: false,
-    };
+  props: {
+    isFav: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     //收藏
     fav() {
       if (this.$store.state.isLogin) {
-        this.isFav = !this.isFav;
-        this.$emit("addFav");
+        //1.如果没有收藏，加入收藏夹
+        if(!this.isFav) {
+          this.$emit("addFav");
+        }
+        //2.如果收藏了，移除收藏夹
+        else {
+          this.$emit("removeFav")
+        }
       } else {
         this.$toast.show("请您先登录", 1000);
         this.$router.push("/login");
@@ -49,6 +56,16 @@ export default {
         this.$router.push("/login");
       }
     },
+
+    //立即购买
+    buy() {
+      if (this.$store.state.isLogin) {
+        this.$emit("buy");
+      } else {
+        this.$toast.show("请您先登录", 1000);
+        this.$router.push("/login");
+      }
+    }
   },
 };
 </script>

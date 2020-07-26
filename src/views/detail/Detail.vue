@@ -14,7 +14,7 @@
       <goods-list :goods="recommends"></goods-list>
     </scroll>
     <back-top @click.native="backTopClick" v-show="isShowBackTop"></back-top>
-    <detail-bottom-bar @addCart="addCart"></detail-bottom-bar>
+    <detail-bottom-bar @addCart="addCart" @addFav="addFav" @removeFav="removeFav" @buy="buy" :isFav="isFav"></detail-bottom-bar>
   </div>
 </template>
 
@@ -67,11 +67,19 @@ export default {
       commentInfo: {},
       recommends: [],
       topList: [],
+      isFav: false,
     };
   },
   created() {
     //1.保存传入的iid
     this.iid = this.$route.params.iid;
+
+    //判断商品是否已经收藏
+    for (let item of this.$store.state.favList) {
+      if (item.iid === this.iid) {
+        this.isFav = true;
+      }
+    }
 
     //2.根据iid请求详情数据
     getDetail(this.iid).then((value) => {
@@ -178,23 +186,46 @@ export default {
         ];
 
         //2.将商品添加到购物车
-        this.$store.dispatch("addCart", product).then(value => {
-          this.$toast.show(value, 500)
-        })
+        this.$store.dispatch("addCart", product).then((value) => {
+          this.$toast.show(value, 500);
+        });
       }
     },
 
     //把商品加入收藏夹
     addFav() {
-      if(this.topImages.length !== 0) {
+      if (this.topImages.length !== 0) {
         //1.获取收藏夹需要展示的信息
         const product = {};
         product.iid = this.iid;
         product.image = this.topImages[0];
         product.title = this.goods.title;
         product.price = this.goods.nowPrice;
-        product.favs = this.goods.columns[1]
+        product.favs = this.goods.columns[1];
+
+        //2.把商品添加到收藏夹
+        this.$store.dispatch("addFav", product).then((value) => {
+          //更新界面收藏状态
+          this.isFav = true
+
+          this.$toast.show(value, 500);
+        })
       }
+    },
+
+    //把商业移除收藏夹
+    removeFav() {
+      this.$store.dispatch("removeFav", this.iid).then((value) => {
+        //更新界面收藏状态
+        this.isFav = false
+        
+        this.$toast.show(value, 500);
+      });
+    },
+
+    //生成订单页面
+    buy() {
+      this.$router.push('/order')
     }
   },
 };

@@ -4,7 +4,7 @@
       <img src="~assets/img/profile/message.svg" alt />
       <span>消息通知</span>
     </div>
-    <div class="item">
+    <div class="item" @click="locationClick">
       <img src="~assets/img/profile/location.svg" alt />
       <span>收货地址</span>
     </div>
@@ -28,9 +28,16 @@ export default {
   name: "UserOther",
   methods: {
     appClick() {
-      this.$toast.show('骗你的宝贝，没有APP', 2000)
-    }
-  }
+      this.$toast.show("骗你的宝贝，没有APP", 2000);
+    },
+    locationClick() {
+      if (!this.$store.state.isLogin) {
+        this.$toast.show("请您先登录");
+      } else {
+        this.$router.push("/location");
+      }
+    },
+  },
 };
 </script>
 

@@ -1,52 +1,48 @@
 <template>
-  <div class="fav-list">
+  <div class="location">
     <nav-bar class="nav-bar">
       <div slot="left" class="back" @click="backClick">
         <img src="~assets/img/favlist/back.svg" alt="">
       </div>
-      <div slot="center">我的收藏({{favList.length}})</div>
+      <div slot="center">地址管理</div>
     </nav-bar>
-    <scroll class="content" ref="scroll">
-      <fav-list-item v-for="(item,index) in favList" :key="index" :item="item"></fav-list-item>
-    </scroll>
+    <location-list></location-list>
+    <!-- <add-locatin></add-locatin> -->
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar'
-import Scroll from 'components/common/scroll/Scroll'
 
-import FavListItem from './childComps/FavListItem'
-
-import {mapGetters} from 'vuex'
+import LocationList from './childComps/LocationList'
+// import AddLocatin from './childComps/AddLocation'
 
 export default {
-  name: "FavList",
+  name: "Location",
   components: {
     NavBar,
-    Scroll,
-    FavListItem
+    LocationList,
+    // AddLocatin
   },
-  computed: {
-    ...mapGetters(['favList'])
+  data() {
+    return {
+      newLocation: false
+    }
   },
   methods: {
     backClick() {
       this.$router.back()
     }
-  },
-  mounted() {
-    this.$refs.scroll.refresh()
   }
 }
 </script>
 
 <style scoped>
-.fav-list {
+.location {
   position: relative;
   z-index: 1;
   height: 100vh;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0.03);
 }
 
 .nav-bar {
@@ -64,5 +60,4 @@ export default {
   height: calc(100% - 44px);
   overflow: hidden;
 }
-
 </style>

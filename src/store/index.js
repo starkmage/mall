@@ -13,9 +13,11 @@ Vue.use(Vuex)
 //2.创建store对象
 const state = {
   cartList: [],
-  isLogin: false,
+  isLogin: true,
   userId: null,
-  favList: []
+  favList: [],
+  location: [],
+  orderLocationIndex: 0
 }
 
 

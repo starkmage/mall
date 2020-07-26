@@ -5,5 +5,13 @@ export default {
 
   cartLength(state) {
     return state.cartList.length
+  },
+
+  favList(state) {
+    return state.favList
+  },
+
+  location(state) {
+    return state.location
   }
 }

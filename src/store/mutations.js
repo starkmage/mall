@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION } from './mutation-types'
 
 export default {
   //mutations唯一的目的就是修改state的值
@@ -47,5 +47,35 @@ export default {
   //添加到收藏夹
   [ADD_TO_FAVLIST](state, payLoad) {
     state.favList.push(payLoad)
+  },
+
+  //从收藏夹移除
+  [REMOVE_FROM_FAVLIST](state, payLoad) {
+    let removeIndex
+    for(let index in state.favList) {
+      if(state.favList[index].iid === payLoad) {
+        removeIndex = index
+      }
+    }
+    state.favList.splice(removeIndex, 1)
+  },
+
+  //添加地址
+  [ADD_LOCATION](state, payLoad) {
+    state.location.push(payLoad)
+  },
+
+  //删除地址
+  [REMOVE_LOCATION](state, id) {
+    for(let index in state.location) {
+      if(state.location[index].id === id) {
+        state.location.splice(index, 1)
+      }
+    }
+  },
+
+  //选择收货地址
+  [SELECT_ORDER_LOCATION](state, index) {
+    state.orderLocationIndex = index
   }
 }

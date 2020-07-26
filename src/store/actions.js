@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION } from './mutation-types'
 
 export default {
   addCart(context, payLoad) {
@@ -35,9 +35,36 @@ export default {
 
   addFav(context, payLoad) {
     return new Promise((resolve, reject) => {
-      payLoad.fav = true
       context.commit(ADD_TO_FAVLIST, payLoad)
       resolve('收藏成功')
+    })
+  },
+
+  removeFav(context, payLoad) {
+    return new Promise((resolve,reject) => {
+      context.commit(REMOVE_FROM_FAVLIST, payLoad)
+      resolve('已取消收藏')
+    })
+  },
+
+  addLocation(context, payLoad) {
+    return new Promise((resolve, reject) => {
+      context.commit(ADD_LOCATION, payLoad)
+      resolve('地址添加成功')
+    })
+  },
+
+  removeLocation(context, id) {
+    return new Promise((resolve,reject) => {
+      context.commit(REMOVE_LOCATION, id)
+      resolve('删除地址成功')
+    })
+  },
+
+  selectOrderLocation(context, index) {
+    return new Promise((resolve, reject) => {
+      context.commit(SELECT_ORDER_LOCATION, index)
+      resolve('成功选择收货地址')
     })
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="info">
-    <div class="fav">
-      <p class="top">0</p>
+    <div class="fav" @click="favClick">
+      <p class="top">{{$store.state.favList.length}}</p>
       <p class="bottom">商品关注</p>
     </div>
     <div class="buy">
@@ -17,7 +17,16 @@
 
 <script>
 export default {
-  name: "UserInfo"
+  name: "UserInfo",
+  methods: {
+    favClick() {
+      if(!this.$store.state.isLogin) {
+        this.$toast.show('请您先登录')
+      } else {
+        this.$router.push('/fav')
+      }
+    }
+  }
 }
 </script>
 

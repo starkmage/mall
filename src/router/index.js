@@ -7,6 +7,11 @@ const Shopcart = () => import("../views/shopcart/Shopcart")
 const Profile = () => import("../views/profile/Profile")
 const Detail = () => import("../views/detail/Detail")
 const Login = () => import("../views/login/Login")
+const FavList = () => import("../views/favlist/FavList")
+const Location = () => import("../views/location/Location")
+const NewLocation = () => import("../views/location/childComps/NewLocation")
+const Order = () => import("../views/order/Order")
+const OrderLocationList = () => import("../views/order/childComps/OrderLocationList")
 
 import store from '../store'
 
@@ -59,6 +64,41 @@ const routes = [
     component: Login,
     meta: {
       needLogin: false
+    }
+  },
+  {
+    path: '/fav',
+    component: FavList,
+    meta: {
+      needLogin: true
+    }
+  },
+  {
+    path: '/location',
+    component: Location,
+    meta: {
+      needLogin: true
+    }
+  },
+  {
+    path: '/location/newlocation',
+    component: NewLocation,
+    meta: {
+      needLogin: true
+    }
+  },
+  {
+    path:'/order',
+    component: Order,
+    meta: {
+      needLogin: true
+    }
+  },
+  {
+    path:'/order/selectlocation',
+    component: OrderLocationList,
+    meta: {
+      needLogin: true
     }
   }
 ]

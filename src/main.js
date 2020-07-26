@@ -4,7 +4,12 @@ import router from './router'
 import store from './store'
 import toast from 'components/common/toast'
 
-/* import VueLazyLoad from 'vue-lazyload' */
+import { AddressEdit, AddressList } from 'vant';
+
+Vue.use(AddressEdit);
+Vue.use(AddressList)
+
+// import VueLazyLoad from 'vue-lazyload'
 
 Vue.config.productionTip = false
 

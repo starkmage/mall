@@ -30,7 +30,12 @@ export default {
   computed: {
     isActive() {
       //看当前活跃的路由的路径是不是
-      return this.$route.path.indexOf(this.path) !== -1
+      if(typeof this.path === 'string') {
+        return this.$route.path.indexOf(this.path) !== -1
+      }
+      if(typeof this.path === 'object') {
+        return this.$route.path === this.path.path
+      }
     },
     activeStyle() {
       return this. isActive ? {color: this.activeColor} : {}

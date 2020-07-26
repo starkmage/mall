@@ -4,9 +4,9 @@
       <img src="~assets/img/detail/shop.svg" alt="">
       <span>{{item.shop}}<i class="arrow-right"></i></span>
     </div>
-    <div class="product">
+    <div class="product" @click="productClick">
       <div class="item-select">
-        <CheckButton :is-selected="item.selected" @click.native="selectClick"></CheckButton>
+        <CheckButton :is-selected="item.selected" @click.native.stop="selectClick"></CheckButton>
       </div>
       <div class="item-img">
         <img :src="item.image" alt />
@@ -20,9 +20,9 @@
         <div class="item-check">
           <div class="item-price">￥{{item.price}}</div>
           <div class="item-count">
-            <button @click="deCrement">-</button>
+            <button @click.stop="deCrement">-</button>
             <input type="number" v-model.lazy.number="getCount" min="0"/>
-            <button @click="inCrement">+</button>
+            <button @click.stop="inCrement">+</button>
           </div>
         </div>
       </div>
@@ -66,6 +66,11 @@ export default {
     //选择商品
     selectClick() {
       this.$store.commit('changeSelected', this.index)
+    },
+
+    //跳转到商品详情页
+    productClick() {
+      this.$router.push('/detail/' + this.item.iid)
     }
   },
   computed: {
