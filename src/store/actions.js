@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION, BUY_PRODUCT, CLEAN_PRODUCT } from './mutation-types'
 
 export default {
   addCart(context, payLoad) {
@@ -66,5 +66,16 @@ export default {
       context.commit(SELECT_ORDER_LOCATION, index)
       resolve('成功选择收货地址')
     })
+  },
+
+  buyProduct(context, product) {
+    return new Promise((resolve, reject) => {
+      context.commit(BUY_PRODUCT, product)
+      resolve('正在生成订单')
+    })
+  },
+
+  cleanProduct(context) {
+    context.commit(CLEAN_PRODUCT)
   }
 }

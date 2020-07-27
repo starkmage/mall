@@ -7,7 +7,7 @@ import toast from 'components/common/toast'
 import { AddressEdit, AddressList } from 'vant';
 
 Vue.use(AddressEdit);
-Vue.use(AddressList)
+Vue.use(AddressList);
 
 // import VueLazyLoad from 'vue-lazyload'
 

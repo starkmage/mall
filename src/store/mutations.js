@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION, BUY_PRODUCT, CLEAN_PRODUCT } from './mutation-types'
 
 export default {
   //mutations唯一的目的就是修改state的值
@@ -43,7 +43,7 @@ export default {
     state.isLogin = true
     state.userId = payLoad
   },
-  
+
   //添加到收藏夹
   [ADD_TO_FAVLIST](state, payLoad) {
     state.favList.push(payLoad)
@@ -52,8 +52,8 @@ export default {
   //从收藏夹移除
   [REMOVE_FROM_FAVLIST](state, payLoad) {
     let removeIndex
-    for(let index in state.favList) {
-      if(state.favList[index].iid === payLoad) {
+    for (let index in state.favList) {
+      if (state.favList[index].iid === payLoad) {
         removeIndex = index
       }
     }
@@ -67,8 +67,8 @@ export default {
 
   //删除地址
   [REMOVE_LOCATION](state, id) {
-    for(let index in state.location) {
-      if(state.location[index].id === id) {
+    for (let index in state.location) {
+      if (state.location[index].id === id) {
         state.location.splice(index, 1)
       }
     }
@@ -77,5 +77,20 @@ export default {
   //选择收货地址
   [SELECT_ORDER_LOCATION](state, index) {
     state.orderLocationIndex = index
+  },
+
+  //从详情页购买商品
+  [BUY_PRODUCT](state, product) {
+    state.orderProduct.push(product)
+  },
+
+  //订单页点击了后退按钮
+  [CLEAN_PRODUCT](state) {
+    state.orderProduct = []
+  },
+
+  //修改订单页商品是否显示店铺名字
+  showShop(state) {
+    state.orderProduct[0].shopShow = true
   }
 }

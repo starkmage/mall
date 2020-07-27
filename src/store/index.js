@@ -17,7 +17,9 @@ const state = {
   userId: null,
   favList: [],
   location: [],
-  orderLocationIndex: 0
+  orderLocationIndex: 0,
+  orderProduct: [],
+  orderList: []
 }
 
 

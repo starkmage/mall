@@ -50,7 +50,7 @@ export default {
 
 <style scoped>
 .location {
-  margin-top: 10px;
+  padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 5px solid rgba(0.1, 0.2, 0.2, 0.1)
 }
@@ -75,7 +75,7 @@ export default {
 i {
   position: relative;
   right: 10px;
-  top: -20px;
+  top: -22px;
   float: right;
 }
 </style>

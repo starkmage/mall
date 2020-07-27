@@ -13,5 +13,9 @@ export default {
 
   location(state) {
     return state.location
+  },
+
+  orderProduct(state) {
+    return state.orderProduct
   }
 }

@@ -225,7 +225,31 @@ export default {
 
     //生成订单页面
     buy() {
-      this.$router.push('/order')
+      if (this.topImages.length !== 0) {
+        //1.获取订单需要展示的信息
+        const product = {};
+        product.iid = this.iid;
+        product.shop = this.shop.name;
+        product.shopShow = true;
+        product.image = this.topImages[0];
+        product.title = this.goods.title;
+        product.price = this.goods.nowPrice;
+        product.count = 1;
+        product.color = this.goods.colors[this.$refs.baseInfo.selectedColor][
+          "name"
+        ];
+        product.size = this.goods.sizes[this.$refs.baseInfo.selectedSize][
+          "name"
+        ];
+
+        //2.将商品生成订单
+        this.$store.dispatch("buyProduct", product).then((value) => {
+          this.$toast.show(value, 700);
+        });
+
+        this.$router.push('/order')
+      }
+      
     }
   },
 };

@@ -48,7 +48,7 @@ export default {
       if (this.allSelected) {
         for (let index in this.$store.state.cartList) {
           if (this.$store.state.cartList[index].selected === true) {
-            this.$store.commit('changeSelected', index)
+            this.$store.commit("changeSelected", index);
           }
         }
       }
@@ -56,15 +56,40 @@ export default {
       else {
         for (let index in this.$store.state.cartList) {
           if (this.$store.state.cartList[index].selected === false) {
-            this.$store.commit('changeSelected', index)
+            this.$store.commit("changeSelected", index);
           }
         }
       }
     },
 
     goCheck() {
-      
-    }
+      this.$store.dispatch('cleanProduct')
+      for (let index in this.$store.state.cartList) {
+        if (this.$store.state.cartList[index].selected) {
+          this.$store.dispatch("buyProduct", Object.assign({}, this.$store.state.cartList[index]));
+        }
+      }
+
+      if (this.$store.state.orderProduct.length === 0) {
+        this.$toast.show("您没有选择任何商品");
+      } else {
+        const shop = this.$store.state.orderProduct[0].shop;
+        let sameShop = true
+        for (let item of this.$store.state.orderProduct) {
+          if(item.shop !== shop) {
+            sameShop = false
+            break
+          } 
+        }
+
+        if(sameShop) {
+          this.$store.commit('showShop')
+          this.$router.push('/order')
+        } else {
+          this.$toast.show('不同店铺的商品请分开结算')
+        }
+      }
+    },
   },
 };
 </script>
