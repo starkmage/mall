@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION, BUY_PRODUCT, CLEAN_PRODUCT } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION, BUY_PRODUCT, CLEAN_PRODUCT, CREATE_ORDER } from './mutation-types'
 
 export default {
   addCart(context, payLoad) {
@@ -41,7 +41,7 @@ export default {
   },
 
   removeFav(context, payLoad) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       context.commit(REMOVE_FROM_FAVLIST, payLoad)
       resolve('已取消收藏')
     })
@@ -55,7 +55,7 @@ export default {
   },
 
   removeLocation(context, id) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       context.commit(REMOVE_LOCATION, id)
       resolve('删除地址成功')
     })
@@ -77,5 +77,13 @@ export default {
 
   cleanProduct(context) {
     context.commit(CLEAN_PRODUCT)
+  },
+
+  createOrder(context, products) {
+    return new Promise((resolve, reject) => {
+      context.commit(CREATE_ORDER, products)
+      resolve('下单成功，全场赵公子买单')
+    })
+
   }
 }

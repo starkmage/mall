@@ -62,6 +62,7 @@ export default {
       }
     },
 
+    //购物车商品的结算
     goCheck() {
       this.$store.dispatch('cleanProduct')
       for (let index in this.$store.state.cartList) {

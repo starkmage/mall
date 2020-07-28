@@ -12,6 +12,7 @@ const Location = () => import("../views/location/Location")
 const NewLocation = () => import("../views/location/childComps/NewLocation")
 const Order = () => import("../views/order/Order")
 const OrderLocationList = () => import("../views/order/childComps/OrderLocationList")
+const orderList = () => import("../views/order/OrderList")
 
 import store from '../store'
 
@@ -97,6 +98,13 @@ const routes = [
   {
     path:'/order/selectlocation',
     component: OrderLocationList,
+    meta: {
+      needLogin: true
+    }
+  },
+  {
+    path:'/orderlist',
+    component: orderList,
     meta: {
       needLogin: true
     }

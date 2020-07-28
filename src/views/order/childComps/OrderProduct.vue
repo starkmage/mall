@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .item {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  /* border-bottom: 2px solid rgba(0, 0, 0, 0.1); */
   margin-top: 5px;
   padding-bottom: 5px;
 }
@@ -63,6 +63,7 @@ export default {
   margin-left: 10px;
   height: 16px;
   line-height: 16px;
+  font-size: 15px;
 }
 
 .product {
@@ -97,10 +98,11 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 15px;
 }
 
 .item-param span {
-  font-size: 13px;
+  font-size: 12px;
   margin-right: 20px;
 }
 
@@ -108,10 +110,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .item-price {
-  color: orangered;
+  color: red;
 }
 </style>

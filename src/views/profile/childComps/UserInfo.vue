@@ -4,11 +4,11 @@
       <p class="top">{{$store.state.favList.length}}</p>
       <p class="bottom">商品关注</p>
     </div>
-    <div class="buy">
-      <p class="top">0</p>
+    <div class="buy" @click="orderClick">
+      <p class="top">{{$store.state.orderList.length}}</p>
       <p class="bottom">我的订单</p>
     </div>
-    <div class="coupon">
+    <div class="coupon" @click="couponClick">
       <p class="top">0</p>
       <p class="bottom">优惠券</p>
     </div>
@@ -24,6 +24,20 @@ export default {
         this.$toast.show('请您先登录')
       } else {
         this.$router.push('/fav')
+      }
+    },
+    orderClick() {
+      if(!this.$store.state.isLogin) {
+        this.$toast.show('请您先登录')
+      } else {
+        this.$router.push('/orderlist')
+      }
+    },
+    couponClick() {
+      if(!this.$store.state.isLogin) {
+        this.$toast.show('请您先登录')
+      } else {
+        this.$toast.show('暂无优惠券可用')
       }
     }
   }

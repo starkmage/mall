@@ -1,19 +1,82 @@
-# mall
+### 技术栈
 
-## Project setup
+#### 前端
+
+* **vue 2.x**：构建用户界面的 MVVM 框架，三大流行框架之一
+* **vue-router**：`Vue.js`官方的路由管理
+* **vuex**：专为 `Vue.js` 应用程序开发的状态管理模式
+* **axios**：服务端通讯，基于 `Promise` 的网络请求插件
+* **ES6**：`ECMAScript` 新一代语法，模块化、解构赋值、`Promise`、`Class`、箭头函数等方法非常好用
+* **vant**：有赞出品的轻量、可靠的移动端 `Vue` 组件库
+* **better-scroll**：滚动插件，优化移动端的体验，体验丝般顺滑
+* **postcss-px-to-viewport**：将 `px` 转换成 `vw` 的插件
+
+#### 后端
+
+* 感谢@coderwhy老师提供的接口数据（GitHub账号即为coderwhy）
+
+#### 自动化工具
+
+* **vue-cli**：`Vue`脚手架工具，快速初始化项目代码，打包项目
+
+### 项目简介
+
+感谢@coderwhy老师的开源精神，在coderwhy老师项目的基础上，改进了一些细节，加入了一些新的功能
+
+加入的新功能有：
+
+* 项目中一些功能必须是登录才能使用的
+* 商品的收藏功能
+  * 加入收藏夹
+  * 取消收藏
+* 商品参数的选择
+  * 加入购物车或者创建订单时需要选择商品参数
+* 购物车的优化
+  * 同一店铺的商品聚合在一起
+  * 购物车内直接修改商品数量、删除商品
+* 创建订单功能的实现
+  * 商品详情页的立即购买
+  * 购物车的聚合结算
+  * 历史订单的查看
+* 收货地址管理
+  * 创建订单时选择地址
+  * 添加新的地址
+  * vant的三级地址选择联动
+
+### 收获
+
+1. 开始整个项目前，首先要划分好目录结构，页面提前划分组件，有助于一直保持逻辑的清晰
+2. 熟悉掌握了 vue 双向绑定、计算属性、事件监听、循环遍历等基础语法
+3. 对 vue 父子组件之间的通信有了更深刻的认识
+4. 熟悉了模块化、组件化的基本思想及实际运用，深刻体会到了组件化的便捷
+5. 掌握了 vue-router 的控制路由的方法
+6. 进一步认识 vuex 的思想，尤其是必须通过 mutations 修改 state 数据
+7. 了解了第三方插件在项目中的应用
+
+### 项目安装及运行
+
+* 克隆项目，进入项目目录
+
+```
+git clone https://github.com/starkmage/mall.git
+cd mall
+```
+
+* 安装依赖
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+* 在本地主机预览
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+* 打包
+
 ```
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

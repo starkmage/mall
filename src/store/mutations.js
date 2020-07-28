@@ -1,4 +1,4 @@
-import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION, BUY_PRODUCT, CLEAN_PRODUCT } from './mutation-types'
+import { ADD_COUNT, ADD_TO_CART, ADD_TO_SAMESHOP, LOGIN_IN, ADD_TO_FAVLIST, REMOVE_FROM_FAVLIST, ADD_LOCATION, REMOVE_LOCATION, SELECT_ORDER_LOCATION, BUY_PRODUCT, CLEAN_PRODUCT, CREATE_ORDER } from './mutation-types'
 
 export default {
   //mutations唯一的目的就是修改state的值
@@ -92,5 +92,10 @@ export default {
   //修改订单页商品是否显示店铺名字
   showShop(state) {
     state.orderProduct[0].shopShow = true
+  },
+
+  //成功创建订单
+  [CREATE_ORDER](state, products) {
+    state.orderList.unshift(products)
   }
 }

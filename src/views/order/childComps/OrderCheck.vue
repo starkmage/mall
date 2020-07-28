@@ -14,13 +14,16 @@
         <span class="onright">-￥{{des.toFixed(2)}}</span>
       </div>
     </div>
-    <div class="total">实付金额：<span>￥{{total}}</span></div>
-    <button class="pay">提交订单</button>
+    <div class="total">
+      实付金额：
+      <span>￥{{total}}</span>
+    </div>
+    <button class="pay" @click="pay">提交订单</button>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "OrderCheck",
@@ -28,21 +31,39 @@ export default {
     return {
       price: 0,
       shipping: 0,
-      des: 0
-    }
+      des: 0,
+    };
   },
   computed: {
-    ...mapGetters(['orderProduct']),
+    ...mapGetters(["orderProduct"]),
     total() {
-      return this.price + this.shipping + this.des
-    }
+      return this.price + this.shipping + this.des;
+    },
   },
   created() {
-    for(let item of this.orderProduct) {
-      this.price += item.price * item.count
+    for (let item of this.orderProduct) {
+      this.price += item.price * item.count;
     }
   },
-  
+  methods: {
+    pay() {
+      if (this.$store.state.location.length === 0) {
+        this.$toast.show("您还没有选择收货地址");
+      } else {
+        const arr = [];
+        for (let item of this.$store.state.orderProduct) {
+          arr.push(item);
+        }
+        this.$store.dispatch("createOrder", arr).then((value) => {
+          this.$toast.show(value);
+          setTimeout(() => {
+            this.$router.replace("/profile");
+            this.$store.dispatch("cleanProduct");
+          }, 1000);
+        });
+      }
+    },
+  },
 };
 </script>
 

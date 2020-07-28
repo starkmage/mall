@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="info-bottom">
-      <div class="enter-shop">进店逛逛</div>
+      <div class="enter-shop" @click="enterClick">进店逛逛</div>
     </div>
   </div>
 </template>
@@ -46,6 +46,11 @@ export default {
     sellsCount(value) {
       if(value < 10000) return value
       return (value/10000).toFixed(1) + '万'
+    }
+  },
+  methods: {
+    enterClick() {
+      this.$toast.show('店铺页面正在开发')
     }
   }
 }

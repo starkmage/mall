@@ -5,7 +5,7 @@
     </nav-bar>
     <div class="content">
       <tab-menu :categories="categories" @selectTab="selectTab"></tab-menu>
-      <scroll class="content-tab" :data="[categoryData]">
+      <scroll class="content-tab">
         <tab-content-category :subcategories="showSubcategory"></tab-content-category>
       </scroll>
     </div>
@@ -32,12 +32,13 @@ export default {
   data() {
     return {
       categories: [],
-      categoryData: {},
+      categoryData: [],
       currentIndex: -1
     };
   },
   created() {
     this.getCategory();
+
   },
   computed: {
     showSubcategory() {
@@ -72,24 +73,27 @@ export default {
       this.currentIndex = index
       const maitKey = this.categories[index].maitKey
       getSubcategory(maitKey).then(value => {
+        //subcategories是一个对象，这是把它的指针指向了value.data
         this.categoryData[this.currentIndex].subcategories = value.data
-        this.categoryData = {...this.categoryData}
-        this.getCategoryDetail('pop')
-        this.getCategoryDetail('new')
-        this.getCategoryDetail('sell')
+        //这是保存起来
+        this.categoryData = [...this.categoryData]
+        // console.log(this.categoryData);
+        // this.getCategoryDetail('pop')
+        // this.getCategoryDetail('new')
+        // this.getCategoryDetail('sell')
       })
     },
 
-    getCategoryDetail(type) {
+    /* getCategoryDetail(type) {
       //1.获取请求的miniWallkey
       const miniWallkey = this.categories[this.currentIndex].miniWallkey
       //2.发送请求，传入miniWallkey和type
       getCategoryDetail(miniWallkey, type).then(value => {
         //3.把获取的子类商品数据保存
         this.categoryData[this.currentIndex].categoryDetail[type] = value
-        this.categoryData = {...this.categoryData}
+        // this.categoryData = {...this.categoryData}
       })
-    },
+    }, */
 
     selectTab(index)
     {
@@ -107,8 +111,6 @@ export default {
 .nav-bar {
   background-color: var(--color-tint);
   color: #ffffff;
-/*   position: relative;
-  z-index: 1; */
 }
 
 .content {

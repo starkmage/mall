@@ -1,11 +1,11 @@
 <template>
   <div class="bottom-bar">
     <div class="bar-left">
-      <div>
+      <div @click="serviceClick">
         <img src="~assets/img/detail/service.svg" alt />
         <span>客服</span>
       </div>
-      <div>
+      <div @click="shopClick">
         <img src="~assets/img/detail/shop.svg" alt />
         <span>店铺</span>
       </div>
@@ -26,20 +26,20 @@ export default {
   props: {
     isFav: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     //收藏
     fav() {
       if (this.$store.state.isLogin) {
         //1.如果没有收藏，加入收藏夹
-        if(!this.isFav) {
+        if (!this.isFav) {
           this.$emit("addFav");
         }
         //2.如果收藏了，移除收藏夹
         else {
-          this.$emit("removeFav")
+          this.$emit("removeFav");
         }
       } else {
         this.$toast.show("请您先登录", 1000);
@@ -65,7 +65,15 @@ export default {
         this.$toast.show("请您先登录", 1000);
         this.$router.push("/login");
       }
-    }
+    },
+
+    serviceClick() {
+      this.$toast.show("客服下班了哦");
+    },
+
+    shopClick() {
+      this.$toast.show("店铺页面正在开发中");
+    },
   },
 };
 </script>

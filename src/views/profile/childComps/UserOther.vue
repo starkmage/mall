@@ -1,6 +1,6 @@
 <template>
   <div class="other">
-    <div class="item">
+    <div class="item" @click="serviceClick">
       <img src="~assets/img/profile/message.svg" alt />
       <span>消息通知</span>
     </div>
@@ -8,11 +8,11 @@
       <img src="~assets/img/profile/location.svg" alt />
       <span>收货地址</span>
     </div>
-    <div class="item">
+    <div class="item" @click="pointClick">
       <img src="~assets/img/profile/pointer.svg" alt />
       <span>积分兑换</span>
     </div>
-    <div class="item">
+    <div class="item" @click="vipClick">
       <img src="~assets/img/profile/viper.svg" alt />
       <span>会员中心</span>
     </div>
@@ -35,6 +35,27 @@ export default {
         this.$toast.show("请您先登录");
       } else {
         this.$router.push("/location");
+      }
+    },
+    serviceClick() {
+      if (!this.$store.state.isLogin) {
+        this.$toast.show("请您先登录");
+      } else {
+        this.$toast.show("不用点了，没人理你");
+      }
+    },
+    pointClick() {
+      if (!this.$store.state.isLogin) {
+        this.$toast.show("请您先登录");
+      } else {
+        this.$toast.show("积分商城正在维护");
+      }
+    },
+    vipClick() {
+      if (!this.$store.state.isLogin) {
+        this.$toast.show("请您先登录");
+      } else {
+        this.$toast.show("会员中心升级中，敬请期待");
       }
     },
   },

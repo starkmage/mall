@@ -17,23 +17,23 @@
           <div slot="left">配送方式</div>
           <div slot="right">标准快递，全国包邮</div>
         </notes-item>
-        <notes-item :dynamic="true">
+        <notes-item :dynamic="true" @click.native="invoiceClick">
           <div slot="left">发票信息</div>
           <div slot="right">电子发票 个人 商品明细</div>
         </notes-item>
+        <notes-item :dynamic="true" @click.native="couponClick">
+          <div slot="left">优惠券</div>
+          <div slot="right">暂无可用优惠券</div>
+        </notes-item>
+        <notes-item :dynamic="true" @click.native="pointClick">
+          <div slot="left">积分抵扣</div>
+          <div slot="right">共有0积分，满1000积分可用</div>
+        </notes-item>
+        <notes-item>
+          <div slot="left">温馨提醒</div>
+          <div slot="right">请仔细核对订单信息</div>
+        </notes-item>
       </order-notes>
-      <notes-item :dynamic="true">
-        <div slot="left">优惠券</div>
-        <div slot="right">暂无可用优惠券</div>
-      </notes-item>
-      <notes-item :dynamic="true">
-        <div slot="left">积分抵扣</div>
-        <div slot="right">共有0积分，满1000积分可用</div>
-      </notes-item>
-      <notes-item>
-        <div slot="left">温馨提醒</div>
-        <div slot="right">请仔细核对订单信息</div>
-      </notes-item>
     </scroll>
 
     <order-check class="check"></order-check>
@@ -66,7 +66,16 @@ export default {
       this.$store.dispatch("cleanProduct");
       this.$router.back();
     },
-  }
+    invoiceClick() {
+      this.$toast.show("暂不支持修改发票信息");
+    },
+    couponClick() {
+      this.$toast.show("您暂无可用优惠券");
+    },
+    pointClick() {
+      this.$toast.show("您的积分不足");
+    },
+  },
 };
 </script>
 

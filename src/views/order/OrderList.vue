@@ -1,17 +1,14 @@
 <template>
-  <div class="location">
+  <div class="order-list">
     <nav-bar class="nav-bar">
       <div slot="left" class="back" @click="backClick">
         <img src="~assets/img/favlist/back.svg" alt />
       </div>
-      <div slot="center">地址管理</div>
+      <div slot="center">我的订单({{$store.state.orderList.length}})</div>
     </nav-bar>
-    <!-- <location-list></location-list> -->
-
     <scroll class="content">
-      <location-list></location-list>
+      <order-list-item v-for="(item,index) in $store.state.orderList" :key="index" :products="item"></order-list-item>
     </scroll>
-    <add-locatin></add-locatin>
   </div>
 </template>
 
@@ -19,21 +16,14 @@
 import NavBar from "components/common/navbar/NavBar";
 import Scroll from "components/common/scroll/Scroll";
 
-import LocationList from "./childComps/LocationList";
-import AddLocatin from "./childComps/AddLocation";
+import OrderListItem from "./childComps/OrderListItem"
 
 export default {
-  name: "Location",
+  name: "OrderList",
   components: {
     NavBar,
     Scroll,
-    LocationList,
-    AddLocatin,
-  },
-  data() {
-    return {
-      newLocation: false,
-    };
+    OrderListItem
   },
   methods: {
     backClick() {
@@ -44,11 +34,11 @@ export default {
 </script>
 
 <style scoped>
-.location {
+.order-list {
   position: relative;
-  z-index: 1;
   height: 100vh;
   background-color: #fff;
+  z-index: 1;
 }
 
 .nav-bar {
@@ -63,7 +53,7 @@ export default {
 }
 
 .content {
-  height: calc(100% - 44px - 50px);
+  height: calc(100% - 44px);
   overflow: hidden;
 }
 </style>

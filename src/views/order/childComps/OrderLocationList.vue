@@ -2,11 +2,19 @@
   <div class="list">
     <nav-bar class="nav-bar">
       <div slot="left" class="back" @click="backClick">
-        <img src="~assets/img/favlist/back.svg" alt="">
+        <img src="~assets/img/favlist/back.svg" alt />
       </div>
       <div slot="center">选择收货地址</div>
     </nav-bar>
-    <van-address-list v-model="chosenAddressId" :list="list" default-tag-text="默认" @edit="onEdit" @add="addLocation" @select="selectLocation"/>
+    <van-address-list
+      v-model="chosenAddressId"
+      :list="list"
+      default-tag-text="默认"
+      @edit="onEdit"
+      @add="addLocation"
+      @select="selectLocation"
+      class="location-list"
+    />
   </div>
 </template>
 
@@ -19,22 +27,22 @@ export default {
   name: "OrderLocationList",
   data() {
     return {
-      chosenAddressId: '1',
+      chosenAddressId: "1",
       list: [],
     };
   },
   components: {
-    NavBar
+    NavBar,
   },
   computed: {
     ...mapGetters(["location"]),
   },
   created() {
-    this.chosenAddressId = String(this.$store.state.orderLocationIndex + 1)
+    this.chosenAddressId = String(this.$store.state.orderLocationIndex + 1);
     for (let index in this.location) {
       const obj = {};
       //注意这里的index是字符串
-      obj.id = String(index*1+1);
+      obj.id = String(index * 1 + 1);
       obj.name = this.location[index].name;
       obj.tel = this.location[index].tel;
       obj.address =
@@ -51,28 +59,38 @@ export default {
   },
   methods: {
     onEdit() {
-      this.$toast.show("抱歉，暂不支持修改地址")
+      this.$toast.show("抱歉，暂不支持修改地址");
     },
     addLocation() {
-      this.$router.push('/location/newlocation')
+      this.$router.push("/location/newlocation");
     },
-    selectLocation(item,index) {
-      this.$store.dispatch('selectOrderLocation', index).then(value => {
-        this.$toast.show(value)
-        this.$router.back()
-      })
+    selectLocation(item, index) {
+      this.$store.dispatch("selectOrderLocation", index).then((value) => {
+        this.$toast.show(value);
+        this.$router.back();
+      });
     },
     backClick() {
-      this.$router.back()
-    }
+      this.$router.back();
+    },
   },
 };
 </script>
 
 <style scoped>
+.list {
+  background-color: rgba(0, 0, 0, 0.03);
+  height: 94vh;
+}
+
 .nav-bar {
   background-color: var(--color-tint);
   color: #fff;
+  position: sticky;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
 }
 
 .back img {

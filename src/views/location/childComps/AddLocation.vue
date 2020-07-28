@@ -18,7 +18,12 @@ export default {
 
 <style scoped>
 .add {
-  height: 40px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.05);
 }
 
   .add img {
@@ -31,8 +36,8 @@ export default {
 
   .add span {
     display: inline-block;
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     font-size: 16px;
     color: #555;
   }
