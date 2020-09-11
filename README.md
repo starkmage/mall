@@ -7,7 +7,6 @@
 * **vuex**：专为 `Vue.js` 应用程序开发的状态管理模式
 * **axios**：服务端通讯，基于 `Promise` 的网络请求插件
 * **ES6**：`ECMAScript` 新一代语法，模块化、解构赋值、`Promise`、`Class`、箭头函数等方法非常好用
-* **vant**：有赞出品的轻量、可靠的移动端 `Vue` 组件库
 * **better-scroll**：滚动插件，优化移动端的体验，体验丝般顺滑
 * **postcss-px-to-viewport**：将 `px` 转换成 `vw` 的插件
 
