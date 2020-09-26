@@ -20,7 +20,7 @@
 
 ### 效果预览
 
-![](https://cdn.jsdelivr.net/gh/starkmage/ImgHosting/starkmage-picgo/20200926134327.gif)
+![](./preview.gif)
 
 ### 项目简介
 
