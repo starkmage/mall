@@ -121,6 +121,7 @@ export default {
           this.currentType = 'sell'
           break
       }
+      // 保持两个 tab-control 的index 一致
       this.$refs.tabControlSub.currentIndex = index
       this.$refs.tabControl.currentIndex = index
     },

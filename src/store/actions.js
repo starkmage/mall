@@ -82,7 +82,7 @@ export default {
   createOrder(context, products) {
     return new Promise((resolve, reject) => {
       context.commit(CREATE_ORDER, products)
-      resolve('下单成功，全场赵公子买单')
+      resolve('下单成功，由赵公子买单')
     })
 
   }

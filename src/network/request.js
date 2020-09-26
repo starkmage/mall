@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request(config) {
   //1.封装实例
   const instance = axios.create({
-    baseURL: '请联系微信coderwhy003获取',
+    baseURL: 'http://152.136.185.210:8000/api/z8',
     timeout: 50000
   })
 
