@@ -18,6 +18,10 @@
 
 * **vue-cli**：`Vue`脚手架工具，快速初始化项目代码，打包项目
 
+### 效果预览
+
+![](https://cdn.jsdelivr.net/gh/starkmage/ImgHosting/starkmage-picgo/20200926134327.gif)
+
 ### 项目简介
 
 感谢@coderwhy老师的开源精神，在coderwhy老师项目的基础上，改进了一些细节，加入了一些新的功能
